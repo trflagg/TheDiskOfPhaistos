@@ -1,6 +1,6 @@
 require.config({
     paths: {
-        'phaser': '../bower_components/phaser/build/phaser'
+        'phaser': '../phaser/build/phaser'
         , 'jquery': '//code.jquery.com/jquery-2.1.1.min'
     }
 
