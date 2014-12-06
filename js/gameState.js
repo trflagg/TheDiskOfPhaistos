@@ -1,7 +1,14 @@
-define(['phaser'], function(phaser) {
+define(['phaser'
+        , './platform'
+        ], function(phaser
+                    , Platform) {
 
   var GameState = function(game) {
   }
+
+  GameState.prototype.preload = function() {
+    this.load.image('platform', 'img/platform.png');
+  };
 
   GameState.prototype.create = function() {
     console.log('GameState create()');
@@ -9,6 +16,10 @@ define(['phaser'], function(phaser) {
     this.game.scale.pageAlignVertically = true;
     this.game.scale.pageAlignHorizontally = true;
     this.game.debug.geom(new Phaser.Rectangle(0, 0, this.game.width - 1, this.game.height), '#ffff00', false);
+
+    var platform = new Platform(this.game, 100, 100);
+
+    this.add.existing(platform);
   }
   return GameState;
 })
