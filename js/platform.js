@@ -27,7 +27,12 @@ define(['phaser'], function(phaser) {
   };
 
   Platform.prototype.pedestrian_left = function() {
-    console.log('pedestrian_left');
+    this.on_leave();
+  };
+
+  Platform.prototype.on_leave = function() {
+    // noop
+    // to be customized on platform-by-platform basis;
   };
 
   Platform.prototype.update = function() {
