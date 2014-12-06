@@ -17,9 +17,8 @@ define(['phaser'
     this.game.scale.pageAlignHorizontally = true;
     this.game.debug.geom(new Phaser.Rectangle(0, 0, this.game.width - 1, this.game.height), '#ffff00', false);
 
-    var platform = new Platform(this.game, 100, 100);
-
-    this.add.existing(platform);
+    this.add.existing(new Platform(this.game, 0, 100));
+    this.add.existing(new Platform(this.game, 128, 100));
   }
   return GameState;
 })
