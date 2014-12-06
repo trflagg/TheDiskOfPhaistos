@@ -7,6 +7,7 @@ define(['phaser'
     var screen = [];
 
     screen.platforms = state.game.add.group();
+    screen.platforms.enableBody = true;
 
     // screen[0]
     screen[0] = [];

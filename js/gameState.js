@@ -26,10 +26,14 @@ define(['phaser'
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.game.physics.arcade.gravity.y = 300;
 
+    // add controls
+    this.left = this.game.input.keyboard.addKey(Phaser.Keyboard.A);
+    this.right = this.game.input.keyboard.addKey(Phaser.Keyboard.D);
+
     // make screen array
     this.screen = Screen(this);
 
-    var pedestrian = this.add.existing(new Phaser.Sprite(this.game, 0, 64, 'pedestrian'));
+    var pedestrian = this.add.existing(new Phaser.Sprite(this.game, 0, 0, 'pedestrian'));
     pedestrian.scale = new Phaser.Point(this.sprite_scale_factor, this.sprite_scale_factor);
     this.game.physics.enable(pedestrian, Phaser.Physics.ARCADE);
     pedestrian.body.gravity.y = 1000;
@@ -40,6 +44,15 @@ define(['phaser'
   }
 
   GameState.prototype.update = function() {
+
+    this.pedestrian.body.velocity.x = 0;
+
+    if (this.left.isDown) {
+      this.pedestrian.body.velocity.x = -150;
+    }
+    else if (this.right.isDown) {
+      this.pedestrian.body.velocity.x = 150;
+    }
     this.game.physics.arcade.collide(this.pedestrian, this.screen.platforms);
   }
 

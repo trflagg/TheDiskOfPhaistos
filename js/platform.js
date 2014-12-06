@@ -5,7 +5,7 @@ define(['phaser'], function(phaser) {
     game.add.existing(this);
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.immovable = true;
-    this.body.gravity = 0;
+    this.body.allowGravity = false;
   }
   Platform.prototype = Object.create(Phaser.Sprite.prototype);
   Platform.prototype.constructor = Platform;
