@@ -1,7 +1,9 @@
 define(['phaser'
-        , './platform']
+        , './platform'
+        , './gameText']
         , function(phaser
-                  , Platform) {
+                  , Platform
+                  , GameText) {
 
   return function(state) {
     var screen = [];
@@ -16,6 +18,7 @@ define(['phaser'
     screen[0][0].activate(screen);
     screen[0][0].on_leave = function() {
       this.deactivate();
+      state.game.add.existing(new GameText(this.state, this.x, this.y, 'The', 32));
     }
 
     screen[0][1] = new Platform(state, 64 * state.position_scale_factor, 128 * state.position_scale_factor);
@@ -23,6 +26,7 @@ define(['phaser'
     screen[0][1].activate(screen);
     screen[0][1].on_leave = function() {
       this.deactivate();
+      state.game.add.existing(new GameText(this.state, this.x, this.y, 'Disk', 32));
     }
 
     screen[0][2] = new Platform(state, 128 * state.position_scale_factor, 128 * state.position_scale_factor);
@@ -31,6 +35,7 @@ define(['phaser'
     screen[0][2].on_leave = function() {
       this.deactivate();
       this.state.screen[0][4].activate(this.state.screen);
+      state.game.add.existing(new GameText(this.state, this.x, this.y, 'of', 32));
     }
 
     screen[0][3] = new Platform(state, screen[0][2].x + screen[0][2].width, 128 * state.position_scale_factor);
@@ -38,6 +43,7 @@ define(['phaser'
     screen[0][3].activate(screen);
     screen[0][3].on_leave = function() {
       this.state.screen[0][5].activate(this.state.screen);
+      state.game.add.existing(new GameText(this.state, this.x, this.y, 'Phaistos', 32));
       this.deactivate();
     }
 
@@ -45,6 +51,7 @@ define(['phaser'
     screen[0][4].scale = new Phaser.Point(state.sprite_scale_factor * 1.5, state.sprite_scale_factor);
     screen[0][4].on_leave = function() {
       this.deactivate();
+      state.game.add.existing(new GameText(this.state, this.x, this.y, 'by hi-scor.es', 32));
     }
 
     screen[0][5] = new Platform(state, 10 * 64 * state.position_scale_factor, 640 * state.position_scale_factor);

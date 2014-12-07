@@ -10,6 +10,8 @@ define(['phaser'
   GameState.prototype.preload = function() {
     this.load.image('platform', 'img/platform.png');
     this.load.image('pedestrian', 'img/pedestrian.png');
+
+    this.load.bitmapFont('Averia', 'fonts/font.png', 'fonts/font.fnt');
   };
 
   GameState.prototype.create = function() {
