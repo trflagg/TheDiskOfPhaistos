@@ -6,6 +6,7 @@ define(['phaser'], function(phaser) {
     state.game.add.existing(this);
     this.body.allowGravity = false;
     this.body.drag.set(400);
+    this.anchor.set(0.5);
     this.state = state;
   }
   FloatingDisk.prototype = Object.create(Phaser.Sprite.prototype);

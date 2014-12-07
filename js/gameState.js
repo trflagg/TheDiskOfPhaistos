@@ -82,6 +82,8 @@ define(['phaser'
       else if (this.down.isDown) {
         this.floating_disk.body.velocity.y = 400;
       }
+
+      this.floating_disk.rotation = this.state.game.physics.arcade.angleToPointer(this.floating_disk);
     }
 
     this.game.physics.arcade.collide(this.pedestrian, this.screen.platforms, this.collide_pedestrian_platform, null, this);
