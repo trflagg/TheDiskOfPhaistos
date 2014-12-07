@@ -50,6 +50,7 @@ define(['phaser'
     pedestrian.body.collideWorldBounds = true;
 
     this.pedestrian = pedestrian;
+    this.waiting = 0;
 
     var bullets = this.game.add.group();
     bullets.enableBody = true;
@@ -90,7 +91,7 @@ define(['phaser'
 
     this.pedestrian.body.velocity.x = 0;
 
-    if (this.fsm.current === 'platform') {
+    if (this.fsm.current === 'platform' && this.game.time.now > this.waiting) {
       if (this.left.isDown) {
         this.pedestrian.body.velocity.x = -150;
       }
@@ -139,6 +140,7 @@ define(['phaser'
       this.screen.disks.setAll('collided', false);
     }
     this.game.physics.arcade.collide(this.bees, this.bullets, this.collide_bee_bullet, null, this);
+    this.game.physics.arcade.collide(this.floating_disk, this.bees, this.collide_disk_bee, null, this);
   }
 
   GameState.prototype.collide_pedestrian_platform = function(pedestrian, platform) {
@@ -153,8 +155,12 @@ define(['phaser'
     bee.kill();
   }
 
+  GameState.prototype.collide_disk_bee = function(disk, bee) {
+    this.fsm.platformer();
+  };
+
   GameState.prototype.click = function() {
-    if (this.fsm.current === 'platform') {
+    if (this.fsm.current === 'platform' && this.game.time.now > this.waiting) {
       this.pedestrian.body.velocity.y = -400;
     }
   };

@@ -18,10 +18,12 @@ define(['fsm'
       setTimeout(function() {
         stage.backgroundColor = '#000000'
       }, 700);
+      this.waiting = 0;
     }
     if (from === 'shoot') {
       this.state.floating_disk.destroy();
       this.state.bees.setAll('alive', false);
+      this.state.waiting = this.state.game.time.now + 1000;
     }
 
   };
@@ -40,7 +42,7 @@ define(['fsm'
 
     var floating_disk = new FloatingDisk(this.state);
     this.state.floating_disk = floating_disk;
-    this.state.next_bee = 1000;
+    this.state.next_bee = this.state.game.time.now + 1000;
   };
 
   fsm.create({
