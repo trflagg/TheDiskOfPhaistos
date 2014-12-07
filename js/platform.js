@@ -8,6 +8,10 @@ define(['phaser'], function(phaser) {
     this.body.immovable = true;
     this.body.allowGravity = false;
 
+    this.body.checkCollision.right = false;
+    this.body.checkCollision.left = false;
+    this.body.checkCollision.down = false;
+
     this.pedestrian_standing_on = false;
 
     this.visible = false;
