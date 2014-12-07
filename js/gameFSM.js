@@ -10,6 +10,15 @@ define(['fsm'], function(fsm) {
 
   GameFSM.prototype.onshoot = function(event, from, to) {
     console.log('shoot');
+
+    var stage = this.state.game.stage;
+    stage.backgroundColor = '#FFFF00';
+    setTimeout(function() {
+      stage.backgroundColor = '#FFFFFF'
+    }, 300);
+    setTimeout(function() {
+      stage.backgroundColor = '#000000'
+    }, 700);
   };
 
   fsm.create({
