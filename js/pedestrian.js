@@ -5,6 +5,8 @@ define(['phaser'], function(phaser) {
     state.game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.maxVelocity.y = 500;
     this.events.onKilled.add(this.killed, this);
+    this.double_jump = false;
+    this.jumped = false;
     this.state = state;
   }
   Pedestrian.prototype = Object.create(Phaser.Sprite.prototype);

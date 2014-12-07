@@ -100,6 +100,7 @@ define(['phaser'
       if (this.pedestrian.y >= this.game.world.height - this.pedestrian.height) {
         this.pedestrian.kill();
       }
+
     }
     else if (this.fsm.current === 'shoot') {
       if (this.left.isDown) {
@@ -163,7 +164,9 @@ define(['phaser'
 
   GameState.prototype.click = function() {
     if (this.fsm.current === 'platform' && this.game.time.now > this.waiting) {
-      this.pedestrian.body.velocity.y = -400;
+      if (this.pedestrian.body.velocity.y === 0){
+        this.pedestrian.body.velocity.y = -400;
+      }
     }
   };
 
