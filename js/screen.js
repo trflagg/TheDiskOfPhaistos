@@ -1,9 +1,11 @@
 define(['phaser'
         , './platform'
-        , './gameText']
+        , './gameText'
+        , './disk']
         , function(phaser
                   , Platform
-                  , GameText) {
+                  , GameText
+                  , Disk) {
 
   return function(state) {
     var screen = [];
@@ -43,6 +45,7 @@ define(['phaser'
     screen[0][3].activate(screen);
     screen[0][3].on_leave = function() {
       this.state.screen[0][5].activate(this.state.screen);
+      this.state.screen[0][10].activate(this.state.screen);
       state.game.add.existing(new GameText(this.state, this.x, this.y, 'Phaistos', 32));
       this.deactivate();
     }
@@ -96,10 +99,11 @@ define(['phaser'
     }
     screen[0][10] = new Platform(state, 1 * 64 * state.position_scale_factor, 640 * state.position_scale_factor);
     screen[0][10].scale = new Phaser.Point(state.sprite_scale_factor * 1, state.sprite_scale_factor);
-    screen[0][10].activate(screen);
     screen[0][10].on_leave = function() {
     }
 
+    screen[0][11] = new Disk(state, screen[0][10]);
+    screen[0][11].scale = new Phaser.Point(state.sprite_scale_factor * 0.5, state.sprite_scale_factor * 0.5);
     return screen;
   }
 })
