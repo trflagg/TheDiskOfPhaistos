@@ -59,12 +59,15 @@ define(['phaser'
 
     this.pedestrian.body.velocity.x = 0;
 
-    if (this.left.isDown) {
-      this.pedestrian.body.velocity.x = -150;
+    if (this.fsm.current === 'platform') {
+      if (this.left.isDown) {
+        this.pedestrian.body.velocity.x = -150;
+      }
+      else if (this.right.isDown) {
+        this.pedestrian.body.velocity.x = 150;
+      }
     }
-    else if (this.right.isDown) {
-      this.pedestrian.body.velocity.x = 150;
-    }
+
     this.game.physics.arcade.collide(this.pedestrian, this.screen.platforms, this.collide_pedestrian_platform, null, this);
     this.game.physics.arcade.overlap(this.pedestrian, this.screen.disks, this.collide_pedestrian_disks, null, this);
   }
@@ -78,7 +81,9 @@ define(['phaser'
   };
 
   GameState.prototype.click = function() {
-    this.pedestrian.body.velocity.y = -400;
+    if (this.fsm.current === 'platform') {
+      this.pedestrian.body.velocity.y = -400;
+    }
   };
 
   return GameState;
