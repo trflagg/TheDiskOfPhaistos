@@ -58,6 +58,7 @@ define(['phaser'
     screen[0][5].scale = new Phaser.Point(state.sprite_scale_factor * 1, state.sprite_scale_factor);
     screen[0][5].on_leave = function() {
       this.deactivate();
+      state.game.add.existing(new GameText(this.state, this.x, this.y, 'what?', 32));
     }
     screen[0][5].on_enter = function() {
       this.state.screen[0][6].activate(this.state.screen);
@@ -71,12 +72,14 @@ define(['phaser'
     screen[0][6].scale = new Phaser.Point(state.sprite_scale_factor * 1, state.sprite_scale_factor);
     screen[0][6].on_leave = function() {
       this.deactivate();
+      state.game.add.existing(new GameText(this.state, this.x, this.y, 'is', 32));
     }
 
     screen[0][7] = new Platform(state, 6 * 64 * state.position_scale_factor, 640 * state.position_scale_factor);
     screen[0][7].scale = new Phaser.Point(state.sprite_scale_factor * 1, state.sprite_scale_factor);
     screen[0][7].on_leave = function() {
       this.deactivate();
+      state.game.add.existing(new GameText(this.state, this.x, this.y, 'this', 32));
     }
 
     screen[0][8] = new Platform(state, 5 * 64 * state.position_scale_factor, 640 * state.position_scale_factor);
@@ -87,6 +90,14 @@ define(['phaser'
     screen[0][9] = new Platform(state, 4 * 64 * state.position_scale_factor, 640 * state.position_scale_factor);
     screen[0][9].scale = new Phaser.Point(state.sprite_scale_factor * 1, state.sprite_scale_factor);
     screen[0][9].on_leave = function() {
+      this.deactivate();
+      state.game.add.existing(new GameText(this.state, this.x, this.y, 'disk?', 32));
+
+    }
+    screen[0][10] = new Platform(state, 1 * 64 * state.position_scale_factor, 640 * state.position_scale_factor);
+    screen[0][10].scale = new Phaser.Point(state.sprite_scale_factor * 1, state.sprite_scale_factor);
+    screen[0][10].activate(screen);
+    screen[0][10].on_leave = function() {
     }
 
     return screen;
