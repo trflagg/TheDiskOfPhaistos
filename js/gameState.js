@@ -42,6 +42,7 @@ define(['phaser'
     this.up = this.game.input.keyboard.addKey(Phaser.Keyboard.W);
     this.down = this.game.input.keyboard.addKey(Phaser.Keyboard.S);
 
+    this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
     this.input.onDown.add(this.click, this);
 
 
@@ -113,6 +114,10 @@ define(['phaser'
         this.floating_disk.body.velocity.y = this.floating_disk.speed;
       }
 
+      if (this.space.isDown) {
+        this.fsm.platformer();
+      }
+
       if (this.game.input.activePointer.isDown)
       {
         this.fire();
@@ -128,8 +133,11 @@ define(['phaser'
     }
 
     this.game.physics.arcade.collide(this.pedestrian, this.screen.platforms, this.collide_pedestrian_platform, null, this);
-    this.game.physics.arcade.overlap(this.pedestrian, this.screen.disks, this.collide_pedestrian_disks, null, this);
-
+    if (this.game.physics.arcade.overlap(this.pedestrian, this.screen.disks, this.collide_pedestrian_disks, null, this) === false) {
+      // pedestrian not touching a disk
+      this.screen.disks.setAll('collided', false);
+      console.log('uncollided');
+    }
     this.game.physics.arcade.collide(this.bees, this.bullets, this.collide_bee_bullet, null, this);
   }
 

@@ -5,13 +5,15 @@ define(['phaser'], function(phaser) {
     state.game.physics.enable(this, Phaser.Physics.ARCADE);
     this.state = state;
     this.body.allowGravity = false;
+    this.collided = false;
   }
   Disk.prototype = Object.create(Phaser.Sprite.prototype);
   Disk.constructor = Disk;
 
   Disk.prototype.pedestrian_collision = function(pedestrian) {
-    if (this.state.fsm.current === 'platform') {
+    if (this.state.fsm.current === 'platform' && !this.collided) {
       this.state.fsm.shooter();
+      this.collided = true;
     }
   };
 

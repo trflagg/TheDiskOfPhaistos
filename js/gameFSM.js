@@ -9,6 +9,21 @@ define(['fsm'
   GameFSM.prototype.onplatform = function(event, from, to) {
     console.log('platform');
 
+    if (from != 'none') {
+      var stage = this.state.game.stage;
+      stage.backgroundColor = '#FFFFFF';
+      setTimeout(function() {
+        stage.backgroundColor = '#FFFF00'
+      }, 300);
+      setTimeout(function() {
+        stage.backgroundColor = '#000000'
+      }, 700);
+    }
+    if (from === 'shoot') {
+      this.state.floating_disk.destroy();
+      this.state.bees.setAll('alive', false);
+    }
+
   };
 
   GameFSM.prototype.onshoot = function(event, from, to) {
