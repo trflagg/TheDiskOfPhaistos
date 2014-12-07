@@ -17,6 +17,10 @@ define(['phaser'
       var platform = new Platform(this.state, this.x, this.y);
       platform.scale = new Phaser.Point(0.5, 0.5);
       platform.activate(this.state.screen);
+      platform.make_current = false;
+      platform.on_leave = function() {
+        this.deactivate();
+      }
     }
   };
   return Bee;

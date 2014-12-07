@@ -14,6 +14,7 @@ define(['phaser'], function(phaser) {
 
     this.pedestrian_standing_on = false;
     this.visible = false;
+    this.make_current = true;
   }
   Platform.prototype = Object.create(Phaser.Sprite.prototype);
   Platform.prototype.constructor = Platform;
@@ -32,7 +33,9 @@ define(['phaser'], function(phaser) {
   Platform.prototype.pedestrian_collision = function() {
     if (!this.pedestrian_standing_on) {
       this.pedestrian_standing_on = true;
-      this.state.current_platform = this;
+      if (this.make_current) {
+        this.state.current_platform = this;
+      }
       this.on_enter();
     }
     return true;
