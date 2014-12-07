@@ -35,6 +35,8 @@ define(['phaser'
     // add controls
     this.left = this.game.input.keyboard.addKey(Phaser.Keyboard.A);
     this.right = this.game.input.keyboard.addKey(Phaser.Keyboard.D);
+    this.up = this.game.input.keyboard.addKey(Phaser.Keyboard.W);
+    this.down = this.game.input.keyboard.addKey(Phaser.Keyboard.S);
 
     this.input.onDown.add(this.click, this);
 
@@ -65,6 +67,20 @@ define(['phaser'
       }
       else if (this.right.isDown) {
         this.pedestrian.body.velocity.x = 150;
+      }
+    }
+    else if (this.fsm.current === 'shoot') {
+      if (this.left.isDown) {
+        this.floating_disk.body.velocity.x = -400;
+      }
+      else if (this.right.isDown) {
+        this.floating_disk.body.velocity.x = 400;
+      }
+      else if (this.up.isDown) {
+        this.floating_disk.body.velocity.y = -400;
+      }
+      else if (this.down.isDown) {
+        this.floating_disk.body.velocity.y = 400;
       }
     }
 

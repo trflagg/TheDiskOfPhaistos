@@ -24,8 +24,7 @@ define(['fsm'
     }, 700);
 
     var floating_disk = new FloatingDisk(this.state);
-    this.state.game.add.existing(floating_disk);
-    this.floating_disk = floating_disk;
+    this.state.floating_disk = floating_disk;
   };
 
   fsm.create({
