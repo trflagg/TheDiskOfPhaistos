@@ -40,6 +40,7 @@ define(['fsm'
 
     var floating_disk = new FloatingDisk(this.state);
     this.state.floating_disk = floating_disk;
+    this.state.next_bee = 1000;
   };
 
   fsm.create({

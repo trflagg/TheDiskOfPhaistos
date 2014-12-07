@@ -76,7 +76,7 @@ define(['phaser'
     bees.setAll('scale', new Phaser.Point(0.25, 0.25));
     this.next_bee = 0;
     this.bees = bees;
-    this.bee_rate_min = 500;
+    this.bee_rate_min = 300;
     this.bee_rate_max = 2000;
 
     // make screen array
@@ -126,6 +126,9 @@ define(['phaser'
         this.next_bee = this.game.time.now + Math.floor(Math.random() * this.bee_rate_max) + this.bee_rate_min;
         var bee = this.bees.getFirstDead();
         bee.reset(Math.floor(Math.random() * this.game.width), Math.floor(Math.random() * this.game.height));
+        while(this.game.physics.arcade.distanceBetween(bee, this.pedestrian) < 200) {
+          bee.reset(Math.floor(Math.random() * this.game.width), Math.floor(Math.random() * this.game.height));
+        }
       }
       this.bees.forEachAlive(this.game.physics.arcade.moveToObject, this.game.physics.arcade, this.floating_disk, 300);
     }
