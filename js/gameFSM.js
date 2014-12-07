@@ -1,4 +1,7 @@
-define(['fsm'], function(fsm) {
+define(['fsm'
+        , './floating_disk']
+        , function(fsm
+                    , FloatingDisk) {
   var GameFSM = function(state) {
     this.state = state;
   }
@@ -19,6 +22,10 @@ define(['fsm'], function(fsm) {
     setTimeout(function() {
       stage.backgroundColor = '#000000'
     }, 700);
+
+    var floating_disk = new FloatingDisk(this.state);
+    this.state.game.add.existing(floating_disk);
+    this.floating_disk = floating_disk;
   };
 
   fsm.create({

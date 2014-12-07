@@ -14,7 +14,7 @@ define(['phaser'
     this.load.image('platform', 'img/platform.png');
     this.load.image('pedestrian', 'img/pedestrian.png');
     this.load.image('disk', 'img/disk.png');
-
+    this.load.image('disk_white', 'img/disk_white.png');
     this.load.bitmapFont('Averia', 'fonts/font.png', 'fonts/font.fnt');
   };
 
