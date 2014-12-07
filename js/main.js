@@ -2,6 +2,7 @@ require.config({
     paths: {
         'phaser': '../phaser/build/phaser'
         , 'jquery': '//code.jquery.com/jquery-2.1.1.min'
+        , 'fsm': '../javascript-state-machine/state-machine'
     }
 
     , shim: {

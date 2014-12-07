@@ -1,8 +1,11 @@
 define(['phaser'
         , './screen'
         , './platform'
+        , './gameFSM'
         ], function(phaser
-                    , Screen) {
+                    , Screen
+                    , Platform
+                    , GameFSM) {
 
   var GameState = function(game) {
   }
@@ -47,6 +50,9 @@ define(['phaser'
 
     // make screen array
     this.screen = Screen(this);
+
+    this.fsm = new GameFSM(this);
+    this.fsm.startup();
   }
 
   GameState.prototype.update = function() {
