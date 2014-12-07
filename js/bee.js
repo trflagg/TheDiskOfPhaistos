@@ -13,9 +13,11 @@ define(['phaser'
   Bee.constructor = Bee;
 
   Bee.prototype.killed = function() {
-    var platform = new Platform(this.state, this.x, this.y);
-    platform.scale = new Phaser.Point(0.5, 0.5);
-    platform.activate(this.state.screen);
+    if (this.inWorld) {
+      var platform = new Platform(this.state, this.x, this.y);
+      platform.scale = new Phaser.Point(0.5, 0.5);
+      platform.activate(this.state.screen);
+    }
   };
   return Bee;
 })
