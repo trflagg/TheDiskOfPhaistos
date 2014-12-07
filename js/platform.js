@@ -27,13 +27,21 @@ define(['phaser'], function(phaser) {
   };
 
   Platform.prototype.pedestrian_collision = function() {
-    this.pedestrian_standing_on = true;
+    if (!this.pedestrian_standing_on) {
+      this.pedestrian_standing_on = true;
+      this.on_enter();
+    }
     return true;
   };
 
   Platform.prototype.pedestrian_left = function() {
     this.on_leave();
   };
+
+  Platform.prototype.on_enter = function() {
+    // noop
+    // to be customized on platform-by-platform basis;
+  }
 
   Platform.prototype.on_leave = function() {
     // noop
