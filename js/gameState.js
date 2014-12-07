@@ -136,7 +136,6 @@ define(['phaser'
     if (this.game.physics.arcade.overlap(this.pedestrian, this.screen.disks, this.collide_pedestrian_disks, null, this) === false) {
       // pedestrian not touching a disk
       this.screen.disks.setAll('collided', false);
-      console.log('uncollided');
     }
     this.game.physics.arcade.collide(this.bees, this.bullets, this.collide_bee_bullet, null, this);
   }
