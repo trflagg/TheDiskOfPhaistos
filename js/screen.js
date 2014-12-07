@@ -47,7 +47,7 @@ define(['phaser'
       this.deactivate();
     }
 
-    screen[0][5] = new Platform(state, 8 * 64 * state.position_scale_factor, 640 * state.position_scale_factor);
+    screen[0][5] = new Platform(state, 10 * 64 * state.position_scale_factor, 640 * state.position_scale_factor);
     screen[0][5].scale = new Phaser.Point(state.sprite_scale_factor * 1, state.sprite_scale_factor);
     screen[0][5].on_leave = function() {
       this.deactivate();
@@ -56,6 +56,7 @@ define(['phaser'
       this.state.screen[0][6].activate(this.state.screen);
       this.state.screen[0][7].activate(this.state.screen);
       this.state.screen[0][8].activate(this.state.screen);
+      this.state.screen[0][9].activate(this.state.screen);
 
     }
 
@@ -74,6 +75,11 @@ define(['phaser'
     screen[0][8] = new Platform(state, 5 * 64 * state.position_scale_factor, 640 * state.position_scale_factor);
     screen[0][8].scale = new Phaser.Point(state.sprite_scale_factor * 1, state.sprite_scale_factor);
     screen[0][8].on_leave = function() {
+      this.deactivate();
+    }
+    screen[0][9] = new Platform(state, 4 * 64 * state.position_scale_factor, 640 * state.position_scale_factor);
+    screen[0][9].scale = new Phaser.Point(state.sprite_scale_factor * 1, state.sprite_scale_factor);
+    screen[0][9].on_leave = function() {
     }
 
     return screen;
