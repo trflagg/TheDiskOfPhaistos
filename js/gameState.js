@@ -60,10 +60,15 @@ define(['phaser'
       this.pedestrian.body.velocity.x = 150;
     }
     this.game.physics.arcade.collide(this.pedestrian, this.screen.platforms, this.collide_pedestrian_platform, null, this);
+    this.game.physics.arcade.overlap(this.pedestrian, this.screen.disks, this.collide_pedestrian_disks, null, this);
   }
 
   GameState.prototype.collide_pedestrian_platform = function(pedestrian, platform) {
     platform.pedestrian_collision();
+  };
+
+  GameState.prototype.collide_pedestrian_disks = function(pedestrian, disk) {
+    disk.pedestrian_collision(pedestrian);
   };
 
   GameState.prototype.click = function() {

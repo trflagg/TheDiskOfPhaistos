@@ -13,6 +13,8 @@ define(['phaser'
     screen.platforms = state.game.add.group();
     screen.platforms.enableBody = true;
 
+    screen.disks = state.game.add.group();
+
     // screen[0]
     screen[0] = [];
     screen[0][0] = new Platform(state, 0, 128 * state.position_scale_factor);
@@ -104,6 +106,8 @@ define(['phaser'
 
     screen[0][11] = new Disk(state, screen[0][10]);
     screen[0][11].scale = new Phaser.Point(state.sprite_scale_factor * 0.5, state.sprite_scale_factor * 0.5);
+    screen.disks.add(screen[0][11]);
+
     return screen;
   }
 })
