@@ -13,7 +13,6 @@ define(['phaser'], function(phaser) {
     this.body.checkCollision.down = false;
 
     this.pedestrian_standing_on = false;
-
     this.visible = false;
   }
   Platform.prototype = Object.create(Phaser.Sprite.prototype);
@@ -33,6 +32,7 @@ define(['phaser'], function(phaser) {
   Platform.prototype.pedestrian_collision = function() {
     if (!this.pedestrian_standing_on) {
       this.pedestrian_standing_on = true;
+      this.state.current_platform = this;
       this.on_enter();
     }
     return true;
@@ -48,6 +48,11 @@ define(['phaser'], function(phaser) {
   }
 
   Platform.prototype.on_leave = function() {
+    // noop
+    // to be customized on platform-by-platform basis;
+  };
+
+  Platform.prototype.on_unleave = function() {
     // noop
     // to be customized on platform-by-platform basis;
   };

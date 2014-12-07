@@ -2,11 +2,13 @@ define(['phaser'
         , './screen'
         , './platform'
         , './bee'
+        , './pedestrian'
         , './gameFSM'
         ], function(phaser
                     , Screen
                     , Platform
                     , Bee
+                    , Pedestrian
                     , GameFSM) {
 
   var GameState = function(game) {
@@ -42,13 +44,9 @@ define(['phaser'
 
     this.game.debug.geom(new Phaser.Rectangle(0, 0, this.game.width - 1, this.game.height), '#ffff00', false);
 
-    var pedestrian = this.add.existing(new Phaser.Sprite(this.game, 0, 0, 'pedestrian'));
-    pedestrian.scale = new Phaser.Point(0.25, 0.25);
-    this.game.physics.enable(pedestrian, Phaser.Physics.ARCADE);
-
-    pedestrian.body.maxVelocity.y = 500;
+    var pedestrian = new Pedestrian(this);
     pedestrian.body.collideWorldBounds = true;
-
+    this.game.add.existing(pedestrian);
     this.pedestrian = pedestrian;
     this.waiting = 0;
 
@@ -97,6 +95,10 @@ define(['phaser'
       }
       else if (this.right.isDown) {
         this.pedestrian.body.velocity.x = 150;
+      }
+
+      if (this.pedestrian.y >= this.game.world.height - this.pedestrian.height) {
+        this.pedestrian.kill();
       }
     }
     else if (this.fsm.current === 'shoot') {
