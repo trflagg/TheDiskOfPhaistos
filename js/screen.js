@@ -15,7 +15,7 @@ define(['phaser'
     screen[0][0].scale = new Phaser.Point(state.sprite_scale_factor, state.sprite_scale_factor);
     screen[0][0].activate(screen);
     screen[0][0].on_leave = function() {
-      console.log('deactivate');
+      this.deactivate();
     }
 
     screen[0][1] = new Platform(state, 64 * state.position_scale_factor, 128 * state.position_scale_factor);

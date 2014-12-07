@@ -21,6 +21,11 @@ define(['phaser'], function(phaser) {
     this.visible = true;
   };
 
+  Platform.prototype.deactivate = function() {
+    this.state.screen.platforms.remove(this);
+    this.visible = false;
+  };
+
   Platform.prototype.pedestrian_collision = function() {
     this.pedestrian_standing_on = true;
     return true;
