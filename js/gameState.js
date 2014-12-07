@@ -15,6 +15,7 @@ define(['phaser'
     this.load.image('pedestrian', 'img/pedestrian.png');
     this.load.image('disk', 'img/disk.png');
     this.load.image('disk_white', 'img/disk_white.png');
+    this.load.image('flower_white', 'img/flower_white.png');
     this.load.bitmapFont('Averia', 'fonts/font.png', 'fonts/font.fnt');
   };
 
@@ -50,6 +51,18 @@ define(['phaser'
 
     this.pedestrian = pedestrian;
 
+    var bullets = this.game.add.group();
+    bullets.enableBody = true;
+    bullets.physicsBodyType = Phaser.Physics.ARCADE;
+    bullets.createMultiple(50, 'flower_white');
+    bullets.setAll('checkWorldBounds', true);
+    bullets.setAll('outOfBoundsKill', true);
+    bullets.setAll('body.allowGravity', false);
+    bullets.setAll('scale', new Phaser.Point(this.sprite_scale_factor / 2, this.sprite_scale_factor /2));
+    this.next_fire = 0;
+    this.bullets = bullets;
+    this.fire_rate = 100;
+
     // make screen array
     this.screen = Screen(this);
 
@@ -71,18 +84,22 @@ define(['phaser'
     }
     else if (this.fsm.current === 'shoot') {
       if (this.left.isDown) {
-        this.floating_disk.body.velocity.x = -400;
+        this.floating_disk.body.velocity.x = -this.floating_disk.speed;
       }
       else if (this.right.isDown) {
-        this.floating_disk.body.velocity.x = 400;
+        this.floating_disk.body.velocity.x = this.floating_disk.speed;
       }
       else if (this.up.isDown) {
-        this.floating_disk.body.velocity.y = -400;
+        this.floating_disk.body.velocity.y = -this.floating_disk.speed;
       }
       else if (this.down.isDown) {
-        this.floating_disk.body.velocity.y = 400;
+        this.floating_disk.body.velocity.y = this.floating_disk.speed;
       }
 
+      if (this.game.input.activePointer.isDown)
+      {
+        this.fire();
+      }
       this.floating_disk.rotation = this.state.game.physics.arcade.angleToPointer(this.floating_disk);
     }
 
@@ -103,6 +120,18 @@ define(['phaser'
       this.pedestrian.body.velocity.y = -400;
     }
   };
+
+  GameState.prototype.fire = function() {
+
+    if (this.game.time.now > this.next_fire && this.bullets.countDead() > 0)
+    {
+        this.next_fire = this.game.time.now + this.fire_rate;
+        var bullet = this.bullets.getFirstDead();
+        bullet.reset(this.floating_disk.x - this.floating_disk.width / 4, this.floating_disk.y - this.floating_disk.height /4);
+        this.game.physics.arcade.moveToPointer(bullet, 1000);
+    }
+
+}
 
   return GameState;
 })

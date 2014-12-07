@@ -5,7 +5,8 @@ define(['phaser'], function(phaser) {
     state.game.physics.enable(this, Phaser.Physics.ARCADE);
     state.game.add.existing(this);
     this.body.allowGravity = false;
-    this.body.drag.set(400);
+    this.speed = 500;
+    this.body.drag.set(1000);
     this.anchor.set(0.5);
     this.state = state;
   }
