@@ -19,7 +19,7 @@ require(['phaser'
     console.log('The Disk of Phaistos');
     console.log('by hi-scor.es');
 
-    var game = new Phaser.Game(($(window).height() - 20) * 1.618, $(window).height() - 20
+    var game = new Phaser.Game(1242, 768
                                 , Phaser.AUTO, 'game');
 
     game.state.add('Game', GameState);

@@ -14,7 +14,7 @@ define(['phaser'
 
   Bee.prototype.killed = function() {
     var platform = new Platform(this.state, this.x, this.y);
-    platform.scale = new Phaser.Point(this.state.sprite_scale_factor, this.state.sprite_scale_factor);
+    platform.scale = new Phaser.Point(0.5, 0.5);
     platform.activate(this.state.screen);
   };
   return Bee;

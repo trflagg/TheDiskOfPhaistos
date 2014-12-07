@@ -24,17 +24,12 @@ define(['phaser'
 
   GameState.prototype.create = function() {
     console.log('GameState create()');
-    this.game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
-    this.game.scale.pageAlignVertically = true;
-    this.game.scale.pageAlignHorizontally = true;
-
-    this.position_scale_factor = this.game.height / 768;
-    this.sprite_scale_factor = this.position_scale_factor / 2;
-
-    this.game.debug.geom(new Phaser.Rectangle(0, 0, this.game.width - 1, this.game.height), '#ffff00', false);
 
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.game.physics.arcade.gravity.y = 1000;
+
+    this.game.scale.pageAlignVertically = true;
+    this.game.scale.pageAlignHorizontally = true;
 
     // add controls
     this.left = this.game.input.keyboard.addKey(Phaser.Keyboard.A);
@@ -45,9 +40,10 @@ define(['phaser'
     this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
     this.input.onDown.add(this.click, this);
 
+    this.game.debug.geom(new Phaser.Rectangle(0, 0, this.game.width - 1, this.game.height), '#ffff00', false);
 
     var pedestrian = this.add.existing(new Phaser.Sprite(this.game, 0, 0, 'pedestrian'));
-    pedestrian.scale = new Phaser.Point(this.sprite_scale_factor / 2, this.sprite_scale_factor / 2);
+    pedestrian.scale = new Phaser.Point(0.25, 0.25);
     this.game.physics.enable(pedestrian, Phaser.Physics.ARCADE);
 
     pedestrian.body.maxVelocity.y = 500;
@@ -62,7 +58,7 @@ define(['phaser'
     bullets.setAll('checkWorldBounds', true);
     bullets.setAll('outOfBoundsKill', true);
     bullets.setAll('body.allowGravity', false);
-    bullets.setAll('scale', new Phaser.Point(this.sprite_scale_factor / 2, this.sprite_scale_factor /2));
+    bullets.setAll('scale', new Phaser.Point(0.25, 0.25));
     this.next_fire = 0;
     this.bullets = bullets;
     this.fire_rate = 100;
@@ -74,8 +70,10 @@ define(['phaser'
     for (var i=0; i<10; i++) {
       bees.add(new Bee(this));
     }
+    bees.setAll('checkWorldBounds', true);
+    bees.setAll('outOfBoundsKill', true);
     bees.setAll('body.allowGravity', false);
-    bees.setAll('scale', new Phaser.Point(this.sprite_scale_factor / 2, this.sprite_scale_factor /2));
+    bees.setAll('scale', new Phaser.Point(0.25, 0.25));
     this.next_bee = 0;
     this.bees = bees;
     this.bee_rate_min = 500;
@@ -168,7 +166,7 @@ define(['phaser'
         this.game.physics.arcade.moveToPointer(bullet, 1000);
     }
 
-}
+  }
 
   return GameState;
 })
