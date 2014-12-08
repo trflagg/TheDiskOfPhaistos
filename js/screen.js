@@ -110,7 +110,7 @@ define(['phaser'
     screen[0][6].scale = new Phaser.Point(0.5 * 1, 0.5);
     screen[0][6].on_leave = function() {
       this.deactivate(this.state.screen);
-      this.state.screen.is = this.state.screen.is = state.game.add.existing(new GameText(this.state, this.x, this.y, 'is', 32));
+      this.state.screen.is = state.game.add.existing(new GameText(this.state, this.x, this.y, 'is', 32));
     }
     screen[0][6].on_unleave = function() {
       this.activate(this.state.screen);
@@ -255,27 +255,34 @@ define(['phaser'
     screen[2][1].scale = new Phaser.Point(0.5, 0.5);
     screen[2][1].on_leave = function() {
       this.deactivate(this.state.screen);
+      this.state.screen.but = state.game.add.existing(new GameText(this.state, this.x, this.y, 'but', 32));
     }
     screen[2][1].on_unleave = function() {
       this.activate(this.state.screen);
+      this.state.screen.but.destroy();
     }
 
     screen[2][2] = new Platform(state, 16 * 64, 386);
     screen[2][2].scale = new Phaser.Point(0.5, 0.5);
     screen[2][2].on_leave = function() {
       this.deactivate(this.state.screen);
-      screen[2][0].activate(this.state.screen);
+      this.state.screen.the2 = state.game.add.existing(new GameText(this.state, this.x, this.y, 'the', 32));
     }
     screen[2][2].on_unleave = function() {
       this.activate(this.state.screen);
+      this.state.screen.the2.destroy();
       screen[2][0].deactivate();
     }
 
     screen[2][3] = new Platform(state, 16 * 64, 256);
     screen[2][3].scale = new Phaser.Point(0.5, 0.5);
     screen[2][3].on_leave = function() {
+      this.deactivate(this.state.screen);
+      this.state.screen.soul = state.game.add.existing(new GameText(this.state, this.x, this.y, 'soul', 32));
     }
     screen[2][3].on_unleave = function() {
+      this.activate(this.state.screen);
+      this.state.screen.soul.destroy();
     }
     screen[2][3].on_enter = function() {
     }
@@ -285,9 +292,11 @@ define(['phaser'
     screen[2][4].scale = new Phaser.Point(0.5, 0.5);
     screen[2][4].on_leave = function() {
       this.deactivate(this.state.screen);
+      this.state.screen.remains = state.game.add.existing(new GameText(this.state, this.x, this.y, 'remains', 32));
     }
     screen[2][4].on_unleave = function() {
       this.activate(this.state.screen);
+      this.state.screen.remains.destroy();
     }
 
 
@@ -295,36 +304,44 @@ define(['phaser'
     screen[2][5].scale = new Phaser.Point(0.5, 0.5);
     screen[2][5].on_leave = function() {
       this.deactivate(this.state.screen);
+      this.state.screen.transformed = state.game.add.existing(new GameText(this.state, this.x, this.y, 'transformed', 32));
     }
     screen[2][5].on_unleave = function() {
       this.activate(this.state.screen);
+      this.state.screen.transformed.destroy();
     }
 
     screen[2][6] = new Platform(state, 15 * 64, 448);
     screen[2][6].scale = new Phaser.Point(0.5, 0.5);
     screen[2][6].on_leave = function() {
       this.deactivate(this.state.screen);
+      this.state.screen.is1 = state.game.add.existing(new GameText(this.state, this.x, this.y, 'is', 32));
     }
     screen[2][6].on_unleave = function() {
       this.activate(this.state.screen);
+      this.state.screen.is1.destroy();
     }
 
     screen[2][7] = new Platform(state, 15 * 64, 320);
     screen[2][7].scale = new Phaser.Point(0.5, 0.5);
     screen[2][7].on_leave = function() {
       this.deactivate(this.state.screen);
+      this.state.screen.body = state.game.add.existing(new GameText(this.state, this.x, this.y, 'body', 32));
     }
     screen[2][7].on_unleave = function() {
       this.activate(this.state.screen);
+      this.state.screen.body.destroy();
     }
 
     screen[2][8] = new Platform(state, 15 * 64, 192);
     screen[2][8].scale = new Phaser.Point(0.5, 0.5);
     screen[2][8].on_leave = function() {
       this.deactivate(this.state.screen);
+      this.state.screen.the1 = state.game.add.existing(new GameText(this.state, this.x, this.y, 'the', 32));
     }
     screen[2][8].on_unleave = function() {
       this.activate(this.state.screen);
+      this.state.screen.the1.destroy();
     }
 
 
