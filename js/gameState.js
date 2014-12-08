@@ -16,6 +16,7 @@ define(['phaser'
 
   GameState.prototype.preload = function() {
     this.load.image('platform', 'img/platform.png');
+    this.load.image('platform_white', 'img/platform_white.png');
     this.load.image('pedestrian', 'img/pedestrian.png');
     this.load.image('disk', 'img/disk.png');
     this.load.image('disk_white', 'img/disk_white.png');
@@ -164,9 +165,9 @@ define(['phaser'
 
   GameState.prototype.click = function() {
     if (this.fsm.current === 'platform' && this.game.time.now > this.waiting) {
-      if (this.pedestrian.body.velocity.y === 0){
+      // if (this.pedestrian.body.velocity.y === 0){
         this.pedestrian.body.velocity.y = -400;
-      }
+      // }
     }
   };
 

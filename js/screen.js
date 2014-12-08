@@ -13,6 +13,9 @@ define(['phaser'
     screen.platforms = state.game.add.group();
     screen.platforms.enableBody = true;
 
+    screen.created_platforms = state.game.add.group();
+    screen.created_platforms.enableBody = true;
+
     screen.disks = state.game.add.group();
 
     // screen[0]
@@ -61,7 +64,10 @@ define(['phaser'
     screen[0][3].on_leave = function() {
       this.state.screen[0][5].activate(this.state.screen);
       this.state.screen[0][10].activate(this.state.screen);
-      this.state.Phaistos = state.game.add.existing(new GameText(this.state, this.x, this.y, 'Phaistos', 32));
+      this.state.Phaistos = state.game.add.existing(new GameText(this.state, this.x, this.y, 'Phaistos', 32))
+      screen[0][11] = new Disk(state, screen[0][10]);
+      screen[0][11].scale = new Phaser.Point(0.5 * 0.5, 0.5 * 0.5);
+      screen.disks.add(screen[0][11]);
       this.deactivate(this.state.screen);
     }
     screen[0][3].on_unleave = function() {
@@ -144,10 +150,97 @@ define(['phaser'
     screen[0][10].scale = new Phaser.Point(0.5 * 1, 0.5);
     screen[0][10].on_leave = function() {
     }
+    screen[0][10].on_enter = function() {
+      screen[0][12].activate(this.state.screen);
+    }
 
-    screen[0][11] = new Disk(state, screen[0][10]);
-    screen[0][11].scale = new Phaser.Point(0.5 * 0.5, 0.5 * 0.5);
-    screen.disks.add(screen[0][11]);
+    screen[0][12] = new Platform(state, 15 * 64, 128, 'platform_white');
+    screen[0][12].scale = new Phaser.Point(0.5, 0.5);
+    screen[0][12].on_enter = function() {
+      // I have no idea why
+      // but it helps to run it several times
+      for (var i=0; i<4; i++) {
+        this.state.screen.platforms.forEach(function(platform) {
+            if (platform && platform.make_current === false) {
+              platform.deactivate();
+            }
+          }, this);
+      }
+
+      screen[1][0].activate(this.state.screen);
+      screen[1][1].activate(this.state.screen);
+      screen[1][2].activate(this.state.screen);
+      screen[1][3].activate(this.state.screen);
+      screen[1][4].activate(this.state.screen);
+      screen[1][5] = new Disk(state, screen[1][3]);
+      screen[1][5].scale = new Phaser.Point(0.5 * 0.5, 0.5 * 0.5);
+      screen.disks.add(screen[1][5]);
+    }
+
+    screen[1] = [];
+    screen[1][0] = new Platform(state, 10 * 64, 128);
+    screen[1][0].scale = new Phaser.Point(0.5, 0.5);
+    screen[1][0].on_leave = function() {
+      this.deactivate(this.state.screen);
+    }
+    screen[1][0].on_unleave = function() {
+      this.activate(this.state.screen);
+    }
+
+    screen[1][1] = new Platform(state, 8 * 64, 128);
+    screen[1][1].scale = new Phaser.Point(0.5, 0.5);
+    screen[1][1].on_leave = function() {
+      this.deactivate(this.state.screen);
+    }
+    screen[1][1].on_unleave = function() {
+      this.activate(this.state.screen);
+    }
+
+    screen[1][2] = new Platform(state, 6 * 64, 128);
+    screen[1][2].scale = new Phaser.Point(0.5, 0.5);
+    screen[1][2].on_leave = function() {
+      this.deactivate(this.state.screen);
+      screen[2][0].activate(this.state.screen);
+    }
+    screen[1][2].on_unleave = function() {
+      this.activate(this.state.screen);
+      screen[2][0].deactivate();
+    }
+
+    screen[1][3] = new Platform(state, 5 * 64, 128);
+    screen[1][3].scale = new Phaser.Point(0.5, 0.5);
+    screen[1][3].on_leave = function() {
+    }
+    screen[1][3].on_unleave = function() {
+    }
+    screen[1][3].on_enter = function() {
+    }
+
+
+    screen[1][4] = new Platform(state, 12 * 64, 128);
+    screen[1][4].scale = new Phaser.Point(0.5, 0.5);
+    screen[1][4].on_leave = function() {
+      this.deactivate(this.state.screen);
+    }
+    screen[1][4].on_unleave = function() {
+      this.activate(this.state.screen);
+    }
+
+    screen[2] = [];
+    screen[2][0] = new Platform(state, 15 * 64, 640, 'platform_white');
+    screen[2][0].scale = new Phaser.Point(0.5, 0.5);
+    screen[2][0].on_enter = function() {
+      // I have no idea why
+      // but it helps to run it several times
+      for (var i=0; i<4; i++) {
+        this.state.screen.platforms.forEach(function(platform) {
+            if (platform && platform.make_current === false) {
+              platform.deactivate();
+            }
+          }, this);
+      }
+    }
+
 
     return screen;
   }

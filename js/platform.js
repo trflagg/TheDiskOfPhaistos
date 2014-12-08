@@ -1,7 +1,8 @@
 define(['phaser'], function(phaser) {
 
-  var Platform = function(state, x, y) {
-    Phaser.Sprite.call(this, state.game, x, y, 'platform');
+  var Platform = function(state, x, y, key) {
+    key = key ? key : 'platform';
+    Phaser.Sprite.call(this, state.game, x, y, key);
     this.state = state;
     state.game.add.existing(this);
     state.game.physics.enable(this, Phaser.Physics.ARCADE);

@@ -19,7 +19,7 @@ define(['phaser'
       platform.activate(this.state.screen);
       platform.make_current = false;
       platform.on_leave = function() {
-        this.deactivate();
+        this.deactivate(this.state.screen);
       }
     }
   };
