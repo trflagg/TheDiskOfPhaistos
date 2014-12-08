@@ -165,9 +165,9 @@ define(['phaser'
 
   GameState.prototype.click = function() {
     if (this.fsm.current === 'platform' && this.game.time.now > this.waiting) {
-      // if (this.pedestrian.body.velocity.y === 0){
+      if (this.pedestrian.body.velocity.y === 0){
         this.pedestrian.body.velocity.y = -400;
-      // }
+      }
     }
   };
 

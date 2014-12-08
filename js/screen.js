@@ -18,6 +18,8 @@ define(['phaser'
 
     screen.disks = state.game.add.group();
 
+    screen.text = state.game.add.group();
+
     // screen[0]
     screen[0] = [];
     screen[0][0] = new Platform(state, 0, 128);
@@ -26,6 +28,7 @@ define(['phaser'
     screen[0][0].on_leave = function() {
       this.deactivate(this.state.screen);
       this.state.screen.the = state.game.add.existing(new GameText(this.state, this.x, this.y, 'The', 32));
+      screen.text.add(this.state.screen.the);
     }
     screen[0][0].on_unleave = function() {
       this.activate(this.state.screen);
@@ -38,6 +41,7 @@ define(['phaser'
     screen[0][1].on_leave = function() {
       this.deactivate(this.state.screen);
       this.state.screen.disk = state.game.add.existing(new GameText(this.state, this.x, this.y, 'Disk', 32));
+      screen.text.add(this.state.screen.disk);
     }
     screen[0][1].on_unleave = function() {
       this.activate(this.state.screen);
@@ -51,6 +55,7 @@ define(['phaser'
       this.deactivate(this.state.screen);
       this.state.screen[0][4].activate(this.state.screen);
       this.state.screen.of = state.game.add.existing(new GameText(this.state, this.x, this.y, 'of', 32));
+      screen.text.add(this.state.screen.of);
     }
     screen[0][2].on_unleave = function() {
       this.activate(this.state.screen);
@@ -65,6 +70,7 @@ define(['phaser'
       this.state.screen[0][5].activate(this.state.screen);
       this.state.screen[0][10].activate(this.state.screen);
       this.state.Phaistos = state.game.add.existing(new GameText(this.state, this.x, this.y, 'Phaistos', 32))
+      screen.text.add(this.state.Phaistos);
       screen[0][11] = new Disk(state, screen[0][10]);
       screen[0][11].scale = new Phaser.Point(0.5 * 0.5, 0.5 * 0.5);
       screen.disks.add(screen[0][11]);
@@ -207,6 +213,13 @@ define(['phaser'
     }
     screen[1][2].on_enter = function() {
       screen[2][0].activate(this.state.screen);
+      if (this.second_time) {
+        this.state.screen.text.setAll('visible', false);
+        this.state.screen.the.setText('Thanks for playing');
+        this.state.screen.the.visible = true;
+        this.state.screen.by.setText('The End');
+      }
+      this.second_time = true;
     }
 
     screen[1][3] = new Platform(state, 5 * 64, 128);
